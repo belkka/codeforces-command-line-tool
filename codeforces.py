@@ -1,5 +1,4 @@
-#! /usr/bin/env python3 
-
+#! /usr/bin/env python3
 import click
 import os
 
@@ -29,19 +28,19 @@ def contest_info(contest_id):
 @click.option('--source_format', default='{0[index]}.cpp', help='Source file format.')
 def init_dir(contest_id, folder_format, cmake_gen, create_source, source_format):
     standings = contest_standings(contestId=contest_id)
-    contest = standings['contest']
+    contest_name = standings['contest']['name']
 
-    os.mkdir(contest['name'])
-    os.chdir(contest['name'])
-    if cmake_gen: 
+    os.mkdir(contest_name)
+    os.chdir(contest_name)
+    if cmake_gen:
         cmake_lists = open('CMakeLists.txt', 'w')
 
     for problem in standings['problems']:
         folder = folder_format.format(problem)
         os.mkdir(folder)
-        
+
         if cmake_gen: cmake_lists.write('add_subdirectory("{}")\n'.format(folder))
-        if create_source: 
+        if create_source:
             source = source_format.format(problem)
             open(folder + '/' + source, 'w').write('')
         if cmake_gen and create_source:
@@ -50,4 +49,3 @@ def init_dir(contest_id, folder_format, cmake_gen, create_source, source_format)
 
 if __name__ == '__main__':
     cli()
-

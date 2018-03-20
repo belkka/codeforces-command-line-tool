@@ -3,7 +3,6 @@
 import requests
 
 
-
 BASE_URL = 'http://codeforces.com/api/'
 
 

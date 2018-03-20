@@ -8,8 +8,8 @@ from codeforces_api import contest_standings
 def main(contest_id):
     standings = contest_standings(contestId=contest_id)
     contest_name = standings['contest']['name']
-    os.mkdir(contest_name);
-    os.chdir(contest_name);
+    os.mkdir(contest_name)
+    os.chdir(contest_name)
     for problem in standings['problems']:
         os.mkdir(u"{}. {}".format(problem['index'], problem['name']))
 
