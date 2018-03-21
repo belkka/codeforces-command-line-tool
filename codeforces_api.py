@@ -8,12 +8,10 @@ BASE_URL = 'http://codeforces.com/api/'
 
 def method(name):
     def cf_api_method(**kwargs):
-        headers = {
-            'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
-        }
+        headers = { 'Accept-Language': 'ru,en;q=0.9' }
 
         r = requests.get(BASE_URL + name, params=kwargs, headers=headers)
-        r.ok or r.raise_for_status()
+        r.raise_for_status()
 
         cfreply = r.json()
         if cfreply['status'] == 'OK':
