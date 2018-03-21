@@ -2,11 +2,11 @@
 import sys
 import os
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 from codeforces_api import contest_standings
 
 
-def main(contest_id):
+def init_dir(contest_id):
     standings = contest_standings(contestId=contest_id)
     contest_name = standings['contest']['name']
     os.mkdir(contest_name)
@@ -17,6 +17,6 @@ def main(contest_id):
 
 progname, *args = sys.argv
 if len(args) != 1:
-    print("Usage: {0} <contest_id>".format(os.path.basename(progname)))
+    print("Usage: {} <contest_id>".format(os.path.basename(progname)))
 else:
-    main(*args)
+    init_dir(*args)
