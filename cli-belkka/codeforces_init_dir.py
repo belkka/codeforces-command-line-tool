@@ -2,6 +2,7 @@
 import sys
 import os
 
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from codeforces_api import contest_standings
 
 
@@ -11,7 +12,7 @@ def main(contest_id):
     os.mkdir(contest_name)
     os.chdir(contest_name)
     for problem in standings['problems']:
-        os.mkdir(u"{}. {}".format(problem['index'], problem['name']))
+        os.mkdir(u"{index}. {name}".format(**problem))
 
 
 progname, *args = sys.argv
